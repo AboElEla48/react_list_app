@@ -21,6 +21,22 @@ class App extends Component {
   }
 
   render = () => {
+
+    let otherPersons = 'Hidden Persons';
+    if(this.state.showPersons) {
+      otherPersons = (
+        <div>
+          {/*Map persons data into Array of Persons components */
+          this.state.personsData.map(onePerson => {
+            return <Person 
+              name={onePerson.name}
+              age={onePerson.age}/>
+
+          })}
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <p>
@@ -33,28 +49,21 @@ class App extends Component {
         {/*Add ternary condition statement 
         to show/hide items */} 
         
+        <h1>Person</h1>
         {
           this.state.showPersons ?
-          <div>
+          
             <Person 
               name={this.state.personsData[0].name}
               age={this.state.personsData[0].age}/>
-            
-            <Person  
-              name={this.state.personsData[1].name}
-              age={this.state.personsData[1].age}/>
-            
-            <Person  
-              name={this.state.personsData[2].name}
-              age={this.state.personsData[2].age}>
-              I invest in my Happiness!
-            </Person>
-          </div> :
-          <div>
-            Hidden contents
-          </div>
+           :
+            <div>
+              Hidden Person
+            </div>
         }
 
+      <h1>Other Persons</h1>
+      {otherPersons}
       </div>
     );
   }
