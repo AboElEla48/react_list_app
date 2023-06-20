@@ -8,9 +8,9 @@ class App extends Component {
   /*State to hold Persons Data in Object/Array */
   state = {
     personsData: [
-      {name: 'Ahmed', age: 39},
-      {name: 'Mido', age: 26},
-      {name: 'Hossam', age: 37}
+      {id: 'wewf', name: 'Ahmed', age: 39},
+      {id: 'vcbgfg', name: 'Mido', age: 26},
+      {id: 'ijgyb', name: 'Hossam', age: 37}
     ],
     showPersons: false
   };
@@ -27,8 +27,8 @@ class App extends Component {
   deletePersonHandler = (personIndex) => {
     console.log('deletePersonHandler Clicked!, Index:' + personIndex);
 
-    /**retrieve items array */
-    const personsDataArr = this.state.personsData;
+    /**retrieve items array as a copy instead of reference*/
+    const personsDataArr = [...this.state.personsData];
     
     /**Delete item */
     personsDataArr.splice(personIndex, 1);
@@ -49,7 +49,8 @@ class App extends Component {
             return <Person 
               name={onePerson.name}
               age={onePerson.age}
-              deleteHandler={() => this.deletePersonHandler(index)}/>
+              deleteHandler={() => this.deletePersonHandler(index)}
+              key={onePerson.id}/>
 
           })}
         </div>
