@@ -1,0 +1,12 @@
+.Person-Card {
+    border: 5px;
+    border-color: '#ee5463';
+    border-style: groove;
+    background-color: rgb(183, 168, 218);
+    align-items: center;
+    text-align: justify;
+    text-decoration-style: solid;
+    color: rgb(69, 13, 221);
+    display: flex;
+    flex-direction: column;
+}
