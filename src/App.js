@@ -5,6 +5,7 @@ import Person from './Person/Person.js'
 
 class App extends Component {
 
+  /*State to hold Persons Data in Object/Array */
   state = {
     personsData: [
       {name: 'Ahmed', age: 39},
@@ -14,23 +15,41 @@ class App extends Component {
     showPersons: false
   };
 
+  /*Toggle Visibility Handler */
   toggleVisibilityHandler = () => {
     console.log('toggleVisibilityHandler Clicked!');
     
+    {/**Change persons visibility state */}
     this.setState({showPersons: !this.state.showPersons});
   }
 
+  /*Delete Person from List Handler */
+  deletePersonHandler = (personIndex) => {
+    console.log('deletePersonHandler Clicked!, Index:' + personIndex);
+
+    /**retrieve items array */
+    const personsDataArr = this.state.personsData;
+    
+    /**Delete item */
+    personsDataArr.splice(personIndex, 1);
+
+    /**Change state */
+    this.setState({personsData: personsDataArr});
+  }
+
+  /*Render method from Component */
   render = () => {
 
-    let otherPersons = 'Hidden Persons';
+    let personsList = 'Hidden Persons';
     if(this.state.showPersons) {
-      otherPersons = (
+      personsList = (
         <div>
           {/*Map persons data into Array of Persons components */
-          this.state.personsData.map(onePerson => {
+          this.state.personsData.map((onePerson, index) => {
             return <Person 
               name={onePerson.name}
-              age={onePerson.age}/>
+              age={onePerson.age}
+              deleteHandler={() => this.deletePersonHandler(index)}/>
 
           })}
         </div>
@@ -46,24 +65,7 @@ class App extends Component {
           </button>
         </p>
 
-        {/*Add ternary condition statement 
-        to show/hide items */} 
-        
-        <h1>Person</h1>
-        {
-          this.state.showPersons ?
-          
-            <Person 
-              name={this.state.personsData[0].name}
-              age={this.state.personsData[0].age}/>
-           :
-            <div>
-              Hidden Person
-            </div>
-        }
-
-      <h1>Other Persons</h1>
-      {otherPersons}
+      {personsList}
       </div>
     );
   }
